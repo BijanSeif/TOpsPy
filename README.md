@@ -17,4 +17,4 @@ Also So many thanks to **Ph. D. Candidate Selamawit Dires** for her supports.
 * **modeling** (SubPackage)
    - **ElePerPend**    : Function that Provide a vector that is perpendicular to the line from first defined point to the last defined point.
    - **eleAxialForce** : Function That return the Axial force of the defined element.
-   - **GmTVector**     : Function that return the Geometric Transformation Vector of any element using only one Parameter. For more information Review This:
+   - **GmTVector**     : Function that return the Geometric Transformation Vector of any element using only one Parameter. For more information Review This: https://github.com/BijanSeif/My-Opensees-Jupyter-NoteBooks/blob/main/Auto%20Geometric%20Transform%20Function%20(GmTVector).ipynb
