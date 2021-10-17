@@ -11,8 +11,8 @@ TopsPy_version = (
 
 assert "." in TopsPy_version
 
-assert os.path.isfile("TOpsPy/version.py")
-with open("TOpsPy/VERSION", "w", encoding="utf-8") as fh:
+assert os.path.isfile("topspy/version.py")
+with open("topspy/VERSION", "w", encoding="utf-8") as fh:
     fh.write(f"{TopsPy_version}\n")
 
 
