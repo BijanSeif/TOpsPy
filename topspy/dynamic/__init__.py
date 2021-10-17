@@ -1,3 +1,3 @@
-from TOpsPy.Dynamic.LAT2 import *
-from TOpsPy.Dynamic.RspSpc import *
-from TOpsPy.Dynamic.SDFTHA import *
+from topspy.dynamic.LAT2 import *
+from topspy.dynamic.RspSpc import *
+from topspy.dynamic.SDFTHA import *
