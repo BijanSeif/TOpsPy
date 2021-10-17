@@ -7,7 +7,7 @@ Created on Various Days
 """
 
   
-from TOpsPy.Modeling.GmTVector import *
+from topspy.modeling.GmTVector import *
 
 def ElePerPend(Nodei,Nodej):
     
