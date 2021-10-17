@@ -1,5 +1,21 @@
 from setuptools import setup, find_packages
 
+import subprocess
+import os
+
+TopsPy_version = (
+    subprocess.run(["git", "describe", "--tags"], stdout=subprocess.PIPE)
+    .stdout.decode("utf-8")
+    .strip()
+)
+
+assert "." in TopsPy_version
+
+assert os.path.isfile("TOpsPy/version.py")
+with open("TOpsPy/VERSION", "w", encoding="utf-8") as fh:
+    fh.write(f"{TopsPy_version}\n")
+
+
 
 with open("README.md", "r") as fh:
     long_description = fh.read()
@@ -7,7 +23,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name="TOpsPy",
-    version="0.0.2",
+    version=TopsPy_version,
     author="BijanSeif (Bijan Sayyafzadeh)",
     author_email="<b.sayyaf@yahoo.com>",
     description="OpenseesPy Functions",
