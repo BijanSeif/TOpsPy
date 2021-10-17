@@ -4,7 +4,7 @@
 @author: Bijan SayyafZadeh (B.sayyaf@yahoo.com)
 
 """
-from TOpsPy.Dynamic.SDFTHA import *
+from topspy.dynamic.SDFTHA import *
  
 def RspSpc(Acceleration,dt,PeriodRange,Damping):
     '''
