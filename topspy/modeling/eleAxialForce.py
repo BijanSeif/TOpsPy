@@ -14,6 +14,7 @@ def eleAxialForce(eleTag):
     import openseespy.opensees as ops
     
     '''
+    @author: Bijan SayyafZadeh (B.sayyaf@yahoo.com)
     
     This Function Return the Axial force of an element
     Tere is some Possibility that Element has some external
