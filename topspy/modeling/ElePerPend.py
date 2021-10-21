@@ -14,17 +14,26 @@ def ElePerPend(Nodei,Nodej):
     '''
     This Function Provide A Perpendicular Vector on the Line connected from 
     Nodei to Node join
-        Nodei : Opensees 3D node as a list with 3 elements
+    
+        Nodei : Opensees 3D nodeTag or a list with 3 values of coordinate of Nodei
         
-    Nodej : Opensees 3D node as a list with 3 elements
+        Nodej : Opensees 3D nodeTag or a list with 3 values of coordinate of Nodej
     
     The 3rd coordinate value is considered as Vertical Direction
     
     '''
+    import openseespy.opensees as ops
     
     #Initial Data
-    x1, y1, z1=Nodei[0],Nodei[1],Nodei[2]
-    x2, y2, z2=Nodej[0],Nodej[1],Nodej[2]
+    if type(Nodei)==int:
+      x1, y1, z1=ops.nodeCoord(Nodei)
+    else:
+      x1, y1, z1=Nodei[0],Nodei[1],Nodei[2]
+    
+    if type(Nodej)==int:
+      x2, y2, z2=ops.nodeCoord(Nodej)
+    else:
+      x2, y2, z2=Nodej[0],Nodej[1],Nodej[2]
     
     
     R1=[x2-x1,y2-y1,z2-z1]
