@@ -21,6 +21,10 @@ def eleAxialForce(eleTag):
     and in the end of the element can be different
     so this code returns two values, One for start and One for End
     
+    Example:
+            [F1, F2]=eleAxialForce(eleTag)
+    
+    So the F1 and F2 are the axial load of the element with the tag equal to eleTag
     '''
     Nodes=ops.eleNodes(eleTag)
     Nodei=ops.nodeCoord(Nodes[0])
