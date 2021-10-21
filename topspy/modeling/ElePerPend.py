@@ -12,6 +12,8 @@ from topspy.modeling.GmTVector import *
 def ElePerPend(Nodei,Nodej):
     
     '''
+    @author: Bijan SayyafZadeh (B.sayyaf@yahoo.com)
+    
     This Function Provide A Perpendicular Vector on the Line connected from 
     Nodei to Node join
     
@@ -20,6 +22,13 @@ def ElePerPend(Nodei,Nodej):
         Nodej : Opensees 3D nodeTag or a list with 3 values of coordinate of Nodej
     
     The 3rd coordinate value is considered as Vertical Direction
+    
+    Example of usage:
+         
+          Vect=ElePerPend(Nodei,Nodej)
+    
+    So the Vect is a list with 3 elements that represent a vector that is perpendicular to the
+    line that is tarted from nodei and end to nodej
     
     '''
     import openseespy.opensees as ops
