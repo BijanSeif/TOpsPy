@@ -33,6 +33,7 @@ def eleAxialForce(eleTag):
     x2, y2, z2=Nodej[0],Nodej[1],Nodej[2]
     
     R1=[x2-x1,y2-y1,z2-z1]
+    R1=Nrmlz(R1,1):
 
     elfor=ops.eleForce(eleTag)
     elefocesi=elfor[0:3]
