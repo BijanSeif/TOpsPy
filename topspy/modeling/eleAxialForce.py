@@ -31,7 +31,7 @@ def eleAxialForce(eleTag):
     Nodei=ops.nodeCoord(Nodes[0])
     Nodej=ops.nodeCoord(Nodes[1])
 
-    print(f'node 1 {Nodei} and type is {type(Nodei)}')
+    #print(f'node 1 {Nodei} and type is {type(Nodei)}')
 
     #Initial Data
     x1, y1, z1=Nodei[0],Nodei[1],Nodei[2]
@@ -44,7 +44,7 @@ def eleAxialForce(eleTag):
     elefocesi=elfor[0:3]
     elefocesj=elfor[6:9]
 
-    print(f'node 1 {elefocesi} and type is {type(elefocesj)}')
+    #print(f'node 1 {elefocesi} and type is {type(elefocesj)}')
 
     eleAxial1=DotPrdct(elefocesi,R1)
     eleAxial2=DotPrdct(elefocesj,R1)
