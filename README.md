@@ -36,4 +36,4 @@ Also So many thanks to **Ph. D. Candidate Selamawit Dires** for her supports.
 * **modeling** (SubPackage)
    - **ElePerPend**    :  **bjm.ElePerPend(1,5)** Using Node Numbers (Node 1 and Node 5) , **bjm.ElePerPend(a,b)** Using Node Coordinate (a and b are the coordinate list of node 1 and node 5)
    - **eleAxialForce** :  **Axial1,Axial2=bjm.eleAxialForce(eleTag)** using element Tag number the axial force of the element is presented in  Axial1, Axial2.
-   - **GmTVector**     :  **vecxz=bjm.GmTVector(Node1,Node2,Theta)** Using Node Coordinate (Node1,Node2 are the coordinate list of node 1 and node 5) and Theta is an integer
+   - **GmTVector**     :  **vec=bjm.GmTVector(Node1,Node2,Theta)** Using Node Coordinate (Node1,Node2 are the coordinate list of node 1 and node 5) and Theta is the cross section rotation angle according degree and the result (vec) is the Geometric transformation vector.
