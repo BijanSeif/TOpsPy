@@ -100,7 +100,9 @@ def GmTVector(FirstNode,SecondNode,Theta,VerticalDOF=3):
     a=GmTVector([0,0,0],[0,0,10],0) ----> a=[-1.0, 0, 0.0]
     a=GmTVector([0,0,10],[0,0,0],0) ----> a=[1.0, 0, 0.0]
     '''
+    
     # Convert nodeTag to Node coordinate IF USER ENTER NODE TAG
+    import openseespy.opensees as ops
     if type(FirstNode)==int:
       FirstNode=ops.nodeCoord(FirstNode)
     
