@@ -34,6 +34,6 @@ Also So many thanks to **Ph. D. Candidate Selamawit Dires** for her supports.
    - **RspSpc** : 
    - **SDFTHA** : 
 * **modeling** (SubPackage)
-   - **ElePerPend**    : 
+   - **ElePerPend**    :  **bjm.ElePerPend(1,5)** #Using Node Numbers (Node 1 and Node 5) , **bjm.ElePerPend(a,b)** #Using Node Coordinate (a and b are the coordinate list of node 1 and node 5)
    - **eleAxialForce** : 
    - **GmTVector**     : 
