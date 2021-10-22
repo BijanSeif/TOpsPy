@@ -30,10 +30,10 @@ Also So many thanks to **Ph. D. Candidate Selamawit Dires** for her supports.
 
 ### Example of using the functions:
 * **dynamic** (SubPackage)
-   - **LAT2**   : Function for importing acceleration data from *.AT2 PEER Files.
-   - **RspSpc** : Function for calculating Linear Response Spectrum for any Time History.
-   - **SDFTHA** : Function for calculation the displacement response history of a SDF under any time history acceleration.
+   - **LAT2**   : 
+   - **RspSpc** : 
+   - **SDFTHA** : 
 * **modeling** (SubPackage)
-   - **ElePerPend**    : Function that Provide a vector that is perpendicular to the line from first defined point to the last defined point.
-   - **eleAxialForce** : Function That return the Axial force of the defined element.
-   - **GmTVector**     : Function that return the Geometric Transformation Vector of any element using only one Parameter. For more information Review This: 
+   - **ElePerPend**    : 
+   - **eleAxialForce** : 
+   - **GmTVector**     : 
