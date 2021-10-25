@@ -109,8 +109,9 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters):
         Fstcoord=ops.nodeCoord(FstNode) #Get First Node Coordinate
         Sndcoord=[Fstcoord[0]+Lxi,Fstcoord[1]+Lyi,Fstcoord[2]+Lzi] #Second Node Coordinate
 
-        if Sndcoord==ops.nodeCoord(Nodej): #If second node is comatible on the last node
+        if i==n-1: #If second node is comatible on the last node
             SndNode=Nodej                  #Second node is the last node and no need to produce new node
+            Sndcoord=ops.nodeCoord(SndNode)
         else:                              #For second node we have to define new node
             SndNode=_getNewNodeNum(Nodei,Nodej) 
             ops.node(SndNode,*Sndcoord)
