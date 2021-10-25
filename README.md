@@ -17,6 +17,7 @@ Also So many thanks to **Ph. D. Candidate Selamawit Dires** for her supports.
 * **modeling** (SubPackage)
    - **ElePerPend**    : Function that Provide a vector that is perpendicular to the line from first defined point to the last defined point.
    - **eleAxialForce** : Function That return the Axial force of the defined element.
+   - **MultiEl**       : Function That draw any number of elements alog defined nodes.      
    - **GmTVector**     : Function that return the Geometric Transformation Vector of any element using only one Parameter. For more information Review This: https://github.com/BijanSeif/My-Opensees-Jupyter-NoteBooks/blob/main/Auto%20Geometric%20Transform%20Function%20(GmTVector).ipynb
 
 
@@ -36,6 +37,7 @@ Also So many thanks to **Ph. D. Candidate Selamawit Dires** for her supports.
 * **modeling** (SubPackage)
    - **ElePerPend**    :  **bjm.ElePerPend(1,5)** Using Node Numbers (Node 1 and Node 5) , **bjm.ElePerPend(a,b)** Using Node Coordinate (a and b are the coordinate list of node 1 and node 5)
    - **eleAxialForce** :  **Axial1,Axial2=bjm.eleAxialForce(eleTag)** using element Tag number the axial force of the element is presented in  Axial1, Axial2.
+   - **MultiEl**       :  **bjm.MultiEl(4,5,5,elep)** #Define 5 elements with elep properties from node 4 to node 5.
    - **GmTVector**     :  **vec=bjm.GmTVector(Node1,Node2,Theta)** Using Node Coordinate (Node1,Node2 are the coordinate list of node 1 and node 5) and Theta is the cross section rotation angle according degree and the result (vec) is the Geometric transformation vector.
 
 Find more examples in detail: https://github.com/BijanSeif/My-Opensees-Jupyter-NoteBooks
