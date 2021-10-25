@@ -2,7 +2,9 @@
 
 **By: Bijan Sayyafzadeh (b.sayyaf@yahoo.com)**
 
-**Total Download:** [![Downloads](https://static.pepy.tech/personalized-badge/topspy?period=total&units=international_system&left_color=black&right_color=orange&left_text=TOpsPy%20Downloads)](https://pepy.tech/project/topspy)
+**Total Download:** 
+
+[![Downloads](https://static.pepy.tech/personalized-badge/topspy?period=total&units=international_system&left_color=black&right_color=orange&left_text=TOpsPy%20Downloads)](https://pepy.tech/project/topspy)
 
 This module conatin my functions for openseespy and you can find the doucumentation using shift+Tab key after their name.
 
