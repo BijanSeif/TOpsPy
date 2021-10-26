@@ -53,11 +53,18 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters):
     
     @author: Bijan SayyafZadeh (B.sayyaf@yahoo.com)
     
-    
+        
     This Function generate muli elements between two nodes automatically. 
     
+    
+    Parameters
+    ----------
+    Acceleration : should be a List.
+    Nodei              : The first node TAG.
+    Nodej              : The last node TAG.
+    Number_Of_Elements : Number of Elements that want to be generated along node Nodei to Nodej.
     Attention:    
-    *EleParameters=is all the parameters that you have to define for any kind of elements that you need
+    *EleParameters     : is a list that all the parameters that you have to define for any kind of elements that you need
     Attention that the function automatically assign value to EleParameters[1] and EleParameters[2] and any 
     value that you enter for them is not important. for example:
     
