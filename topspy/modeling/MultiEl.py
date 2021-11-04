@@ -111,7 +111,7 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters):
     if n%2==0:
         elemtag=[n/2-1] #tag of element that it's 2ndNode is the middle
     else:
-        elemtag=[(n-1)/2, (n-1)/2+1] #tag of element2 that it's 2ndNodes are the middle
+        elemtag=[(n-1)/2-1, (n-1)/2] #tag of element2 that it's 2ndNodes are the middle
 
 
     NodeiC=ops.nodeCoord(Nodei)
