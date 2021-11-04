@@ -54,7 +54,8 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters):
     @author: Bijan SayyafZadeh (B.sayyaf@yahoo.com)
     
         
-    This Function generate muli elements between two nodes automatically. 
+    This Function generate muli elements between two nodes automatically and finally after
+    generating the fils it returns the middle node tag/s and it's/their coordinate. 
     
     
     Parameters
@@ -88,7 +89,13 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters):
     Or you can write
     
     bjm.MultiEl(1,3,4,['elasticBeamColumn', eleTag, *eleNodes, Area, E_mod, G_mod, Jxx, Iy, Iz, transfTag])
-
+    
+    
+    Function returns:
+    ----------
+    midtag=list of middle point/s Tag
+    midcoord=list of nodecoordinate of middle point/s
+    
     '''
 
     
@@ -97,6 +104,15 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters):
 
 
     n=Number_Of_Elements
+    
+    #Check We will have One middle point or two
+    midtag=[]
+    midcoord=[]
+    if n%2==0:
+        elemtag=[n/2-1] #tag of element that it's 2ndNode is the middle
+     else:
+        elemtag=[(n-1)/2, (n-1)/2+1] #tag of element2 that it's 2ndNodes are the middle
+
 
     NodeiC=ops.nodeCoord(Nodei)
     NodejC=ops.nodeCoord(Nodej)
@@ -122,6 +138,12 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters):
         else:                              #For second node we have to define new node
             SndNode=_getNewNodeNum(Nodei,Nodej) 
             ops.node(SndNode,*Sndcoord)
+            
+            if i in elemtag:
+                midtag.append(SndNode)
+                midcoord.append(Sndcoord)
+            
+        
 
         
         Newele=_getNewEleNum(Nodei,Nodej) # New element Tag
@@ -134,7 +156,7 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters):
         FstNode=SndNode
 
 
-    return 'Generated'
+    return midtag, midcoord
 
 
 
