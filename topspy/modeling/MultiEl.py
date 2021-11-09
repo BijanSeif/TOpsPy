@@ -45,7 +45,7 @@ def _getNewEleNum(Nodei,Nodej):
             return Numb
     
 
-def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters):
+def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No'):
     
 
 
@@ -63,6 +63,7 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters):
     Acceleration : should be a List.
     Nodei              : The first node TAG.
     Nodej              : The last node TAG.
+    EndPinned          : If the User wants end pinned connection it Should be enter 'Yes'.
     Number_Of_Elements : Number of Elements that want to be generated along node Nodei to Nodej.
     Attention:    
     *EleParameters     : is a list that all the parameters that you have to define for any kind of elements that you need
@@ -127,14 +128,32 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters):
 
     # --- Generating Nodes and Elements--------------------
     FstNode=Nodei #First Node Tag
-    for i in range(n):
 
+    if EndPinned.upper()=='YES':    #If user Decide to have an element with end pinned connection
+        Fstcoord=ops.nodeCoord(FstNode)
+        FstNode=_getNewNodeNum(Nodei,Nodej)
+        ops.node(FstNode,*Fstcoord)
+        ops.equalDOF(Nodei, FstNode, *[1,1,1,0,0,0])
+
+
+
+       
+    for i in range(n):
         Fstcoord=ops.nodeCoord(FstNode) #Get First Node Coordinate
         Sndcoord=[Fstcoord[0]+Lxi,Fstcoord[1]+Lyi,Fstcoord[2]+Lzi] #Second Node Coordinate
 
         if i==n-1: #If second node is comatible on the last node
             SndNode=Nodej                  #Second node is the last node and no need to produce new node
             Sndcoord=ops.nodeCoord(SndNode)
+                
+              
+            if EndPinned.upper()=='YES':  #If user Decide to have an element with end pinned connection
+                Sndcoord=ops.nodeCoord(SndNode)
+                SndNode=_getNewNodeNum(Nodei,Nodej)
+                ops.node(SndNode,*Sndcoord)
+                ops.equalDOF(Nodej, SndNode, *[1,1,1,0,0,0])
+
+
         else:                              #For second node we have to define new node
             SndNode=_getNewNodeNum(Nodei,Nodej) 
             ops.node(SndNode,*Sndcoord)
