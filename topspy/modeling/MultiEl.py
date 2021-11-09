@@ -134,7 +134,7 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No'):
         Fstcoord=ops.nodeCoord(FstNode)
         FstNode=_getNewNodeNum(Nodei,Nodej)
         ops.node(FstNode,*Fstcoord)
-        ops.equalDOF(Nodei, FstNode, *[1,1,1,0,0,0])
+        ops.equalDOF(Nodei, FstNode, *[1,2,3])
 
 
 
@@ -152,7 +152,7 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No'):
                 Sndcoord=ops.nodeCoord(SndNode)
                 SndNode=_getNewNodeNum(Nodei,Nodej)
                 ops.node(SndNode,*Sndcoord)
-                ops.equalDOF(Nodej, SndNode, *[1,1,1,0,0,0])
+                ops.equalDOF(Nodej, SndNode, *[1,2,3])
 
 
         else:                              #For second node we have to define new node
