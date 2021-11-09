@@ -91,6 +91,7 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No'):
     
     bjm.MultiEl(1,3,4,['elasticBeamColumn', eleTag, *eleNodes, Area, E_mod, G_mod, Jxx, Iy, Iz, transfTag])
     
+    Also Above Codes can be written in this way: bjm.MultiEl(1,3,4,elep,'Yes') That the last 'Yes' cause generating element with 2 end pinned head.
     
     Function returns:
     ----------
