@@ -45,7 +45,7 @@ def _getNewEleNum(Nodei,Nodej):
             return Numb
     
 
-def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=100e6):
+def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=1e9,NewMaterialTag=1):
     
 
 
@@ -64,6 +64,8 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=100e6)
     Nodei              : The first node TAG.
     Nodej              : The last node TAG.
     EndPinned          : If the User wants end pinned connection it Should be enter 'Yes'.
+    E=1e9              : For end Pinned condition The Rigid zerolink element stiffness should be defined by E (Default=1e9)
+    NewMaterialTag=1   : For End Pinned Condition a New Tag for an Elastic Material Should be assigned by user THAT Has Not Been Assigned PREVIOUSly.
     Number_Of_Elements : Number of Elements that want to be generated along node Nodei to Nodej.
     Attention:    
     *EleParameters     : is a list that all the parameters that you have to define for any kind of elements that you need
@@ -101,8 +103,13 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=100e6)
     
     
     #Parameters For end Pinned Material
-    matTag=1
-    ops.uniaxialMaterial('Elastic', matTag, E)
+    
+    if EndPinned.upper()=='YES':
+         matTag=NewMaterialTag
+         try:
+            ops.uniaxialMaterial('Elastic', matTag, E)   #if code encounter with error means this material has been defined previously
+         except:
+            pass
 
 
 
