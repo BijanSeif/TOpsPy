@@ -1,8 +1,8 @@
+
+   
 '''
 DATE: 10/26/2021
-
 @author: Bijan SayyafZadeh (B.sayyaf@yahoo.com)
-
 '''
 
 def _getNewNodeNum(Nodei,Nodej):
@@ -45,7 +45,7 @@ def _getNewEleNum(Nodei,Nodej):
             return Numb
     
 
-def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No'):
+def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=100e6):
     
 
 
@@ -72,8 +72,6 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No'):
     
     EleP=['elasticBeamColumn', eleTag, *eleNodes, Area, E_mod, G_mod, Jxx, Iy, Iz, transfTag]-->
     MultiEl(Nodei=1,Nodej=2,Number_Of_Elements=5,*EleParameters=EleP)
-
-
     A complete usage sample:
         
     import topspy.modeling as bjm
@@ -82,16 +80,14 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No'):
     Node2=ops.nodeCoord(3)
     vecxz=GmT.GmTVector(Node1,Node2,Theta)
     ops.geomTransf('Linear', transfTag, *vecxz)
-
     elep=['elasticBeamColumn', eleTag, *eleNodes, Area, E_mod, G_mod, Jxx, Iy, Iz, transfTag] #Opensees desire Elements Parameters
-
     bjm.MultiEl(1,3,4,elep)
     
     Or you can write
     
     bjm.MultiEl(1,3,4,['elasticBeamColumn', eleTag, *eleNodes, Area, E_mod, G_mod, Jxx, Iy, Iz, transfTag])
     
-    Also Above Codes can be written in this way: bjm.MultiEl(1,3,4,elep,'Yes') That the last 'Yes' cause generating element with 2 end pinned head.
+    Also Above Codes can be written in this way: bjm.MultiEl(1,3,4,elep,'Yes',1e9) That the last 'Yes' cause generating element with 2 end pinned head with zero length element.
     
     Function returns:
     ----------
@@ -102,6 +98,11 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No'):
 
     
     import openseespy.opensees as ops
+    
+    
+    #Parameters For end Pinned Material
+    matTag=1
+    ops.uniaxialMaterial('Elastic', matTag, E)
 
 
 
@@ -131,31 +132,34 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No'):
     FstNode=Nodei #First Node Tag
 
     if EndPinned.upper()=='YES':    #If user Decide to have an element with end pinned connection
-        Fstcoord=ops.nodeCoord(FstNode)
+        
+        Fstcoord=ops.nodeCoord(Nodei)
+        lastcoord=ops.nodeCoord(Nodej)
+        vecx=[lastcoord[0]-Fstcoord[0],lastcoord[1]-Fstcoord[1],lastcoord[2]-Fstcoord[2]] #Longitudinal Vector of the Element
+        vecyp=[vecx[0],vecx[1]+0.1,vecx[2]]
+        
         FstNode=_getNewNodeNum(Nodei,Nodej)
         ops.node(FstNode,*Fstcoord)
-        ops.equalDOF(Nodei, FstNode, *[1,2,3])
-
-
-
+        
+        Newele=_getNewEleNum(Nodei,Nodej) # New element Tag
+        
+        ops.element('zeroLength', Newele, *[Nodei,FstNode], 
+                    '-mat', *[matTag,matTag,matTag,matTag],
+                    '-dir', *[1,2,3,4],
+                    '-orient', *vecx, *vecyp)
+        
+        
        
     for i in range(n):
         Fstcoord=ops.nodeCoord(FstNode) #Get First Node Coordinate
         Sndcoord=[Fstcoord[0]+Lxi,Fstcoord[1]+Lyi,Fstcoord[2]+Lzi] #Second Node Coordinate
-
-        if i==n-1: #If second node is comatible on the last node
+        
+        if i==n-1 and EndPinned.upper()!='YES': #If second node is comatible on the last node
             SndNode=Nodej                  #Second node is the last node and no need to produce new node
             Sndcoord=ops.nodeCoord(SndNode)
-                
-              
-            if EndPinned.upper()=='YES':  #If user Decide to have an element with end pinned connection
-                Sndcoord=ops.nodeCoord(SndNode)
-                SndNode=_getNewNodeNum(Nodei,Nodej)
-                ops.node(SndNode,*Sndcoord)
-                ops.equalDOF(Nodej, SndNode, *[1,2,3])
+        
+        else:
 
-
-        else:                              #For second node we have to define new node
             SndNode=_getNewNodeNum(Nodei,Nodej) 
             ops.node(SndNode,*Sndcoord)
             
@@ -174,24 +178,25 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No'):
 
 
         FstNode=SndNode
+        
+        if i==n-1 and EndPinned.upper()=='YES': #If second node is comatible on the last node
+
+            Fstcoord=ops.nodeCoord(Nodei)
+            lastcoord=ops.nodeCoord(Nodej)
+            
+            vecx=[lastcoord[0]-Fstcoord[0],lastcoord[1]-Fstcoord[1],lastcoord[2]-Fstcoord[2]] #Longitudinal Vector of the Element
+            vecyp=[vecx[0],vecx[1]+0.1,vecx[2]]
+            
+            Sndcoord=ops.nodeCoord(SndNode)
+            
+            Newele=_getNewEleNum(Nodei,Nodej) # New element Tag
+            
+            ops.element('zeroLength', Newele, *[SndNode,Nodej],
+                        '-mat', *[matTag,matTag,matTag],
+                        '-dir', *[1,2,3],
+                        '-orient', *vecx, *vecyp)
+
 
 
     return midtag, midcoord
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
