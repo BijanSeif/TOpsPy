@@ -41,7 +41,7 @@ Also So many thanks to **Ph. D. Candidate Selamawit Dires** for her supports.
 * **modeling** (SubPackage)
    - **ElePerPend**    :  **bjm.ElePerPend(1,5)** Using Node Numbers (Node 1 and Node 5) , **bjm.ElePerPend(a,b)** Using Node Coordinate (a and b are the coordinate list of node 1 and node 5)
    - **eleAxialForce** :  **Axial1,Axial2=bjm.eleAxialForce(eleTag)** using element Tag number the axial force of the element is presented in  Axial1, Axial2.
-   - **MultiEl**       :  **bjm.MultiEl(4,5,5,elep)** #Define 5 elements with elep properties from node 4 to node 5. **bjm.MultiEl(4,5,5,elep,'Yes',1e9)** The last **'Yes'** cause that generated element be 2 head pinned using zero length Element with Rigid Stiffness equal to 1e9 or any other user value!.
+   - **MultiEl**       :  **bjm.MultiEl(4,5,5,elep)** #Define 5 elements with elep properties from node 4 to node 5. **bjm.MultiEl(4,5,5,elep,'Yes',1e9,10)** The last **'Yes'** cause that generated element be 2 head pinned using zero length Element with Rigid Stiffness equal to 1e9 or any other user value with NewMaterialTag equal to 10!.
    - **GmTVector**     :  **vec=bjm.GmTVector(Node1,Node2,Theta)** Using Node Coordinate (Node1,Node2 are the coordinate list of node 1 and node 5) and Theta is the cross section rotation angle according degree and the result (vec) is the Geometric transformation vector.
 
 Find more examples in detail: https://github.com/BijanSeif/My-Opensees-Jupyter-NoteBooks
