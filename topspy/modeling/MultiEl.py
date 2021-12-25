@@ -1,5 +1,6 @@
+from topspy.modeling.ElePerPend import *
+import math
 
-   
 '''
 DATE: 10/26/2021
 @author: Bijan SayyafZadeh (B.sayyaf@yahoo.com)
@@ -45,9 +46,8 @@ def _getNewEleNum(Nodei,Nodej):
             return Numb
     
 
-def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=1e9,NewMaterialTag=1):
+def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,MidCurveDisp=0,EndPinned='No',E=1e9,NewMaterialTag=1):
     
-
 
     '''
     
@@ -63,6 +63,7 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=1e9,Ne
     Acceleration : should be a List.
     Nodei              : The first node TAG.
     Nodej              : The last node TAG.
+    MidCurveDisp       : By entering any value, Element will have a displacement in its center point with a sinosure shape 
     EndPinned          : If the User wants end pinned connection it Should be enter 'Yes'.
     E=1e9              : For end Pinned condition The Rigid zerolink element stiffness should be defined by E (Default=1e9)
     NewMaterialTag=1   : For End Pinned Condition a New Tag for an Elastic Material Should be assigned by user THAT Has Not Been Assigned PREVIOUSly.
@@ -89,7 +90,7 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=1e9,Ne
     
     bjm.MultiEl(1,3,4,['elasticBeamColumn', eleTag, *eleNodes, Area, E_mod, G_mod, Jxx, Iy, Iz, transfTag])
     
-    Also Above Codes can be written in this way: bjm.MultiEl(1,3,4,elep,'Yes',1e9) That the last 'Yes' cause generating element with 2 end pinned head with zero length element.
+    Also Above Codes can be written in this way: bjm.MultiEl(1,3,4,elep,MidCurveDisp=0,EndPinned='Yes',E=1e9,NewMaterialTag=10) That the last 'Yes' cause generating element with 2 end pinned head with zero length element with New matrial Tag equal to 10.
     
     Function returns:
     ----------
@@ -101,29 +102,44 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=1e9,Ne
     
     import openseespy.opensees as ops
     
+    n=int(Number_Of_Elements)
     
-    #Parameters For end Pinned Material
-    
+    #Parameters For end Pinned Material--------
     if EndPinned.upper()=='YES':
          matTag=NewMaterialTag
          try:
             ops.uniaxialMaterial('Elastic', matTag, E)   #if code encounter with error means this material has been defined previously
          except:
             pass
+        
 
-
-
-    n=Number_Of_Elements
     
-    #Check We will have One middle point or two
+    #Check We will have One middle point or two and Curve Factor-----------------------------------------------
     midtag=[]
     midcoord=[]
     if n%2==0:
         elemtag=[n/2-1] #tag of element that it's 2ndNode is the middle
+        
+        #For Curved Case, The Perpendicular Normal vector Factors 
+        fact=[math.sin(i/(n/2)*math.pi/2)*MidCurveDisp for i in range(1,int(n/2)+1)]
+        fact=fact+fact[-2::-1]+[0]
+        fact=[fact[0]]+[fact[i+1]-fact[i] for i in range(0,len(fact)-1)] #Increase Factore Respect to Previouse Factor
+        
     else:
         elemtag=[(n-1)/2-1, (n-1)/2] #tag of element2 that it's 2ndNodes are the middle
-
-
+        
+        #For Curved Case, The Perpendicular Normal vector Factors
+        fact=[math.sin(i/((n-1)/2)*math.pi/2)*MidCurveDisp for i in range(1,int((n-1)/2)+1)]
+        fact=fact+fact[-1::-1]+[0]
+        fact=[fact[0]]+[fact[i+1]-fact[i] for i in range(0,len(fact)-1)] #Increase Factore Respect to Previouse Factor
+        
+    
+    
+    
+    NPV=ElePerPend(Nodei,Nodej) #Perpendicular direction Normal Vector
+        
+    
+    
     NodeiC=ops.nodeCoord(Nodei)
     NodejC=ops.nodeCoord(Nodej)
 
@@ -134,11 +150,13 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=1e9,Ne
     Lzi=(z2-z1)/n
 
 
-
-    # --- Generating Nodes and Elements--------------------
+    
     FstNode=Nodei #First Node Tag
-
-    if EndPinned.upper()=='YES':    #If user Decide to have an element with end pinned connection
+    
+    
+    
+    #First zerolength Element
+    if EndPinned.upper()=='YES':    #If user Decide to have an element with end pinned connection-----------------
         
         Fstcoord=ops.nodeCoord(Nodei)
         lastcoord=ops.nodeCoord(Nodej)
@@ -154,15 +172,20 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=1e9,Ne
                     '-mat', *[matTag,matTag,matTag,matTag],
                     '-dir', *[1,2,3,4],
                     '-orient', *vecx, *vecyp)
+     #-------------------------------------------------------------------------------------------------------------   
         
-        
-       
+    # --- Generating Nodes and Elements----------------------------------------------------------------------------
     for i in range(n):
+        
+        Fact=fact[i]   #Factor of curved element
+        
         Fstcoord=ops.nodeCoord(FstNode) #Get First Node Coordinate
         Sndcoord=[Fstcoord[0]+Lxi,Fstcoord[1]+Lyi,Fstcoord[2]+Lzi] #Second Node Coordinate
         
+        Sndcoord=[i+Fact*j for i,j in zip(Sndcoord,NPV)] #Add the Curved Value to the node coordinate Using Fact and NPV
+        
         if i==n-1 and EndPinned.upper()!='YES': #If second node is comatible on the last node
-            SndNode=Nodej                  #Second node is the last node and no need to produce new node
+            SndNode=Nodej                       #Second node is the last node and no need to produce new node
             Sndcoord=ops.nodeCoord(SndNode)
         
         else:
@@ -173,9 +196,6 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=1e9,Ne
             if i in elemtag:
                 midtag.append(SndNode)
                 midcoord.append(Sndcoord)
-            
-        
-
         
         Newele=_getNewEleNum(Nodei,Nodej) # New element Tag
 
@@ -186,6 +206,7 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=1e9,Ne
 
         FstNode=SndNode
         
+        #Last Zero Length Element---------------------------------------------------------------
         if i==n-1 and EndPinned.upper()=='YES': #If second node is comatible on the last node
 
             Fstcoord=ops.nodeCoord(Nodei)
@@ -202,8 +223,8 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,EndPinned='No',E=1e9,Ne
                         '-mat', *[matTag,matTag,matTag],
                         '-dir', *[1,2,3],
                         '-orient', *vecx, *vecyp)
+            #---------------------------------------------------------------------------------------
 
 
 
     return midtag, midcoord
-
