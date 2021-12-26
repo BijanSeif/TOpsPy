@@ -161,7 +161,10 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,MidCurveDisp=0,EndPinne
         Fstcoord=ops.nodeCoord(Nodei)
         lastcoord=ops.nodeCoord(Nodej)
         vecx=[lastcoord[0]-Fstcoord[0],lastcoord[1]-Fstcoord[1],lastcoord[2]-Fstcoord[2]] #Longitudinal Vector of the Element
-        vecyp=[vecx[0],vecx[1]+0.1,vecx[2]]
+        if vecx[0]==0 and vecx[2]==0:
+            vecyp=[vecx[0]+0.1,vecx[1],vecx[2]]
+        else:
+            vecyp=[vecx[0],vecx[1]+0.1,vecx[2]]
         
         FstNode=_getNewNodeNum(Nodei,Nodej)
         ops.node(FstNode,*Fstcoord)
@@ -213,7 +216,10 @@ def MultiEl(Nodei,Nodej,Number_Of_Elements,EleParameters,MidCurveDisp=0,EndPinne
             lastcoord=ops.nodeCoord(Nodej)
             
             vecx=[lastcoord[0]-Fstcoord[0],lastcoord[1]-Fstcoord[1],lastcoord[2]-Fstcoord[2]] #Longitudinal Vector of the Element
-            vecyp=[vecx[0],vecx[1]+0.1,vecx[2]]
+            if vecx[0]==0 and vecx[2]==0:
+                vecyp=[vecx[0]+0.1,vecx[1],vecx[2]]
+            else:
+                vecyp=[vecx[0],vecx[1]+0.1,vecx[2]]
             
             Sndcoord=ops.nodeCoord(SndNode)
             
