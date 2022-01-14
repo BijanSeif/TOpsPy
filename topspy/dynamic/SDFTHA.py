@@ -57,7 +57,7 @@ def SDFTHA(Acceleration,dt,wn,Damping):
     freq = ops.eigen('-fullGenLapack', 3) # for the define model Always there is 3 Eigen Values
     freq=max(freq)
     freq=freq**0.5
-    ops.rayleigh(0., 0., 0., 2*Damping/freq)
+    ops.rayleigh(2*Damping*freq, 0., 0., 0)
     
     
     # Set time series to be passed to uniform excitation
