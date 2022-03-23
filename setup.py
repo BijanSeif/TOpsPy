@@ -29,6 +29,13 @@ setup(
     description="OpenseesPy Functions",
     long_description_content_type="text/markdown",
     long_description=long_description ,
+    package_data={
+        "":["*.AT2"],
+        # If any package contains *.txt or *.rst files, include them:
+        #"": ["*.txt", "*.rst"],
+        # And include any *.msg files found in the "hello" package, too:
+        #"hello": ["*.msg"],
+    },
     packages=find_packages(),
     install_requires=['openseespy', 'eseesminipy','numpy'],
     url="https://github.com/BijanSeif",
@@ -40,6 +47,3 @@ setup(
     ],
 
 )
-
-
-

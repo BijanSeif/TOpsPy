@@ -48,6 +48,13 @@ def LAT2(Filename):
             except:
                 dt=None
                 continue
+                
+        if dt==None and 'NPTS,' in i and 'DT' in i:
+            try:  #To check If next value doesn't be a number
+                dt=float(i[1])
+            except:
+                dt=None
+                continue
         #-----------------------------------------------------------------------------------------------------------------
         
     
