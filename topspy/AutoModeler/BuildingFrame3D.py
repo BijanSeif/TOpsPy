@@ -2,7 +2,7 @@ def BuildingFrame3D(numBayX, numBayY, numFloor):
     import openseespy.opensees as ops
     '''
     This model modes 3D building that beams and columns are connectied to each other continuesly
-    only enter nu,ber of bays and floors
+    only enter number of bays and floors
     model is ready for eigen value analysis
     Sample:
     BuildingFrame3D(numBayX=4, numBayY=4, numFloor=5)
@@ -94,6 +94,6 @@ def BuildingFrame3D(numBayX, numBayY, numFloor):
             nodeTag1 += 1
 
     # set damping based on first eigen mode
-    freq = ops.eigen('-genBandArpack', 1)[0]**0.5
-    dampRatio = 0.05
-    ops.rayleigh(0., 0., 0., 2*dampRatio/freq)
+    # freq = ops.eigen('-genBandArpack', 1)[0]**0.5
+    # dampRatio = 0.05
+    # ops.rayleigh(0., 0., 0., 2*dampRatio/freq)
