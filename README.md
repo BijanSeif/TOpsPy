@@ -2,6 +2,9 @@
 
 [![PyPI version fury.io](https://badge.fury.io/py/TOpsPy.svg)](https://pypi.python.org/pypi/topspy/)
 [![Downloads](https://pepy.tech/badge/topspy)](https://pepy.tech/project/topspy)
+[![Downloads](https://pepy.tech/badge/topspy/month)](https://pepy.tech/project/topspy)
+[![Downloads](https://pepy.tech/badge/topspy/week)](https://pepy.tech/project/topspy)
+
 
 
 **By: Bijan Sayyafzadeh (b.sayyaf@yahoo.com)**
@@ -13,6 +16,11 @@ And\
 Also So many thanks to **Ph. D. Candidate Selamawit Dires** for her supports.
 
 ### Packages and Functions that Are presented are here with their usage Description:
+
+
+* **AutoModeler** (SubPackage)
+
+* **TimeHistories** (SubPackage)
 
 * **dynamic** (SubPackage)
    - **LAT2**   : Function for importing acceleration data from *.AT2 PEER Files.
@@ -34,6 +42,11 @@ Also So many thanks to **Ph. D. Candidate Selamawit Dires** for her supports.
 3- Using **bjd** or **bjm** you have access to mentioned function.
 
 ### Example of using the functions:
+
+* **AutoModeler** (SubPackage)
+
+* **TimeHistories** (SubPackage)
+
 * **dynamic** (SubPackage)
    - **LAT2**   : 
    - **RspSpc** : 
