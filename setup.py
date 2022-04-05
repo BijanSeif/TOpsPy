@@ -30,7 +30,7 @@ setup(
     long_description_content_type="text/markdown",
     long_description=long_description ,
     package_data={
-        "":["*.AT2"],
+        "":["*.AT2","*.At2","*.at2"],
         # If any package contains *.txt or *.rst files, include them:
         #"": ["*.txt", "*.rst"],
         # And include any *.msg files found in the "hello" package, too:
