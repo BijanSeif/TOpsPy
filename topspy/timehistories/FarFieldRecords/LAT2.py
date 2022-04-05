@@ -72,4 +72,4 @@ def LAT2(Filename):
 
 def Recordslist():
     pathdir=_os.path.dirname(__file__)
-    return [x[:-4] for x in _os.listdir(pathdir) if x.endswith(".AT2")] #Get list of directories in the current file
+    return [x[:-4] for x in _os.listdir(pathdir) if x.endswith(".AT2") or x.endswith(".At2") or x.endswith(".at2")] #Get list of directories in the current file
