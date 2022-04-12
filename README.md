@@ -11,9 +11,6 @@
 
 This module conatin my functions for openseespy and you can find the doucumentation using shift+Tab key after their name.
 
-Special Thanks to **Dr. Silivia Mazzoni & Prof. Michael Scott** Because of many guidances on my efforts\
-And\
-Also So many thanks to **Ph. D. Candidate Selamawit Dires** for her supports.
 
 ### Packages and Functions that Are presented are here with their usage Description:
 
