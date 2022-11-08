@@ -33,7 +33,6 @@ def FFT(x, y, max_freq=None, Trange=None):
     
     '''
     import numpy as np
-    from scipy.stats import norm
     
     x=np.array(x)
     y=np.array(y)
