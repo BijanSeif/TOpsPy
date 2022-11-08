@@ -49,7 +49,7 @@ def FFT(x, y, max_freq=None, Trange=None):
     tbot=0
     ttop=Nf
     
-    if Trange!=None and type(Trange)=list:
+    if Trange!=None and type(Trange)==list:
         if len(Trange)==2:
             ttop=T.index([i for i in T if i>=Trange[0]][-1])
             tbot=T.index([i for i in T if i>=Trange[1]][-1])        
