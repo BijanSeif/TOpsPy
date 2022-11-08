@@ -31,6 +31,7 @@ def FFT(x, y, max_freq=None, Trange=None):
     wf : Angular Speed
     yf : Frequency Magnitude
     
+    sample: [xf,tf,wf, yf]=bdy.FFT(t,e,Trange=[0.3,0.4])     #Returns the fourier transform in the period range between 0.3 and 0.4 sec
     '''
     import numpy as np
     
@@ -51,6 +52,7 @@ def FFT(x, y, max_freq=None, Trange=None):
     
     if Trange!=None and type(Trange)==list:
         if len(Trange)==2:
+            T=list(Tf)
             ttop=T.index([i for i in T if i>=Trange[0]][-1])
             tbot=T.index([i for i in T if i>=Trange[1]][-1])        
 
