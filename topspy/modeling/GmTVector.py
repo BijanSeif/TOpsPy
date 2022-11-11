@@ -40,7 +40,7 @@ def GmTVector(FirstNode,SecondNode,Theta,VerticalDOF=3):
         
     SecondNode : Opensees 3D node as a list with 3 elements
 
-    Theta (Deg) : An scalar value that shows the cross section rotation angle.
+    Theta (Deg) : An scalar value that shows the cross section rotation angle. Rotation Direction is according right hand rule!
     
     VerticalDOF : Shows the Vertical Direction that is considered by user 
                   For example if I considered nodes coordinate as x,y,z and 
@@ -58,9 +58,8 @@ def GmTVector(FirstNode,SecondNode,Theta,VerticalDOF=3):
                 
     
     Columns:
-        For columns the cross section main axis is considered in 1st horizontal coordinate direction 
-        if the first node is located above the second nodeand and for vise versa it is in the negative 
-        direction of the 1st coordinate. Any theta value is the rotation clockwise
+        For columns the cross section main axis is considered in 1st horizontal coordinate direction. 
+        
         
         
                            _____________
