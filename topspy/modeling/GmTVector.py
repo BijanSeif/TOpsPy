@@ -144,9 +144,13 @@ def GmTVector(FirstNode,SecondNode,Theta,VerticalDOF=3):
     if (x1==x2 and y1==y2): #Columns Condition
         z2=z2-0.1
         V1=[(x2-x1),(y2-y1),abs(z2-z1)]
+        if z2<z1:
+            theta=-theta
+            
         z2=z1
         y2=y1-0.1
-        theta=-theta
+
+        
        
     V2=[(x2-x1),(y2-y1),(z2-z1)]
      #VN is the vector that is normal to the perpendicular page of V1 that is that z local axis of section
