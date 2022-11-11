@@ -2,7 +2,7 @@
 
 Created on Various Days 
 
-@author: Bijan SayyafZadeh (B.sayyaf@yahoo.com)
+@author: Bijan SayyafZadeh (B.sayyaf@yahoo.com) (LinkedIn : https://www.linkedin.com/in/bijan-sayyafzadeh-6027aa7a/)
 
 """
 
@@ -32,8 +32,6 @@ def GmTVector(FirstNode,SecondNode,Theta,VerticalDOF=3):
     '''
     
      @author: Bijan SayyafZadeh (B.sayyaf@yahoo.com)
-              Silvia Mazzoni (SilviaMazzoni@yahoo.com)
-     @Date: 10/14/2021
     
     -----------------------------------------------------------------------
     Parameters:
@@ -144,17 +142,15 @@ def GmTVector(FirstNode,SecondNode,Theta,VerticalDOF=3):
     z2=z2+0.1
     
     if (x1==x2 and y1==y2): #Columns Condition
-       z2=z1
-       x2=x1
-       y2=y1-0.1
+        z2=z2-0.1
+        V1=[(x2-x1),(y2-y1),abs(z2-z1)]
+        z2=min(z1,z2)
+        y2=y1-0.1
        
     V2=[(x2-x1),(y2-y1),(z2-z1)]
      #VN is the vector that is normal to the perpendicular page of V1 that is that z local axis of section
     VN=VecProduct(V1,V2)
-     #VN=Nrmlz(VN,1)
-     
-     #print(f'V1.VN={round(DotPrdct(V1,VN),4)}')
-     #print(f'V2xVN={round(DotPrdct(V2,VN),4)}')
+
      
      #---------------------- Rotating -----------------------------
     theta=-theta*float(math.pi)/180
@@ -172,17 +168,11 @@ def GmTVector(FirstNode,SecondNode,Theta,VerticalDOF=3):
     VR=Nrmlz(VR,1)
     VN=Nrmlz(VN,1)
      
-     #print (f'V1={V1} and its size is equal to {round(VecSize(V1),4)}')
-     #print (f'VR={VR} and its size is equal to {round(VecSize(VR),4)}')
-     #print (f'VN={VN} and its size is equal to {round(VecSize(VN),1)}')
-     
-     #print(f'V1.VR={round(DotPrdct(V1,VR),4)}')
-     #print(f'VN.VR={round(DotPrdct(VN,VR),4)}')
      
      #--------------- Calculation Of Geometric Transform ---------------------
      
     VRsize=VecSize(VR)
-     #print(f'Size of VR is {VRsize}')
+
      
     GeomTrans=[VR[0]/VRsize,VR[1]/VRsize,VR[2]/VRsize]
     
@@ -200,4 +190,3 @@ def GmTVector(FirstNode,SecondNode,Theta,VerticalDOF=3):
     
     
     return GeomTrans
-     #print(f'GeomTransfor={GeomTrans}')
